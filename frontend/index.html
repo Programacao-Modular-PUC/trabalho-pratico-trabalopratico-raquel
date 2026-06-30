@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Hospedagem</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Sistema de Hospedagem</h1>
+    <p></p>
+</header>
+
+<main class="container">
+    <section class="card">
+        <h2>Cadastrar Cliente</h2>
+        <form id="formCliente">
+            <input name="nome" placeholder="Nome" required>
+            <input name="cpf" placeholder="CPF" required>
+            <input name="endereco" placeholder="Endereço">
+            <input name="telefone" placeholder="Telefone">
+            <input name="email" placeholder="E-mail" type="email">
+            <button type="submit">Salvar Cliente</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Cadastrar Residência</h2>
+        <form id="formResidencia">
+            <input name="endereco" placeholder="Endereço" required>
+            <input name="numero" placeholder="Número">
+            <input name="bairro" placeholder="Bairro">
+            <input name="cep" placeholder="CEP">
+            <input name="telefone" placeholder="Telefone">
+            <input name="email" placeholder="E-mail" type="email">
+            <button type="submit">Salvar Residência</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Cadastrar Quarto</h2>
+        <form id="formQuarto">
+            <select name="tipo" id="tipoQuarto" required>
+                <option value="" disabled selected>Selecione o tipo de quarto...</option>
+                <option value="individual">Individual</option>
+                <option value="duplo">Duplo</option>
+                <option value="familia">Família</option>
+            </select>
+            
+            <select name="residenciaId" id="selectResidenciaQuarto" required>
+                <option value="" disabled selected>Carregando residências...</option>
+            </select>
+            
+            <input name="valorBase" placeholder="Valor base (R$)" type="number" step="0.01" required>
+            
+            <div class="checkbox-group">
+                <label><input name="possuiAr" type="checkbox"> Ar-condicionado</label>
+                <label><input name="possuiHidro" type="checkbox"> Hidromassagem</label>
+            </div>
+
+            <div id="camposIndividual" class="campo-extra hidden">
+                <input name="quantidadeCamasSolteiro" placeholder="Quantidade de Camas Solteiro" type="number">
+            </div>
+
+            <div id="camposDuplo" class="campo-extra hidden">
+                <select name="tipoCama">
+                    <option value="COMUM">Cama casal comum</option>
+                    <option value="QUEEN">Queen</option>
+                    <option value="KING">King</option>
+                </select>
+                <label><input name="permiteBerco" type="checkbox" checked> Permite berço</label>
+            </div>
+
+            <div id="camposFamilia" class="campo-extra hidden">
+                <input name="camasSolteiro" placeholder="Camas solteiro (família)" type="number">
+                <input name="camasCasal" placeholder="Camas casal (família)" type="number">
+                <input name="camasQueenKing" placeholder="Camas queen/king (família)" type="number">
+                <input name="quantidadeAmbientes" placeholder="Ambientes (família)" type="number">
+            </div>
+
+            <button type="submit">Salvar Quarto</button>
+        </form>
+    </section>
+
+    <section class="card destaque">
+        <h2>Realizar Aluguel/Reserva</h2>
+        <form id="formAluguel">
+            <select name="clienteId" id="selectAluguelCliente" required>
+                <option value="" disabled selected>Selecione o Cliente...</option>
+            </select>
+            
+            <select name="residenciaId" id="selectAluguelResidencia" required>
+                <option value="" disabled selected>Selecione a Residência...</option>
+            </select>
+            
+            <select name="quartoId" id="selectAluguelQuarto" required disabled>
+                <option value="" disabled selected>Selecione uma residência primeiro...</option>
+            </select>
+            
+            <div class="data-group">
+                <label>Entrada: <input name="dataEntrada" type="datetime-local" required></label>
+                <label>Saída: <input name="dataSaida" type="datetime-local" required></label>
+            </div>
+            
+            <input name="quantidadeHospedes" placeholder="Quantidade de hóspedes" type="number" required>
+            <label><input name="solicitaBerco" type="checkbox"> Solicita berço</label>
+            
+            <select name="tarifa">
+                <option value="PADRAO">Tarifa padrão</option>
+                <option value="ALTA_TEMPORADA">Alta temporada</option>
+                <option value="BAIXA_TEMPORADA">Baixa temporada</option>
+                <option value="CLIENTE_FREQUENTE">Cliente frequente</option>
+            </select>
+            <button type="submit">Confirmar Aluguel</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Pagamento</h2>
+        <form id="formPagamento">
+            <select name="aluguelId" id="selectPagamentoAluguel" required>
+                <option value="" disabled selected>Selecione o Aluguel...</option>
+            </select>
+            
+            <select name="formaPagamento">
+                <option value="PIX">PIX</option>
+                <option value="CARTAO_CREDITO">Cartão de crédito</option>
+                <option value="CARTAO_DEBITO">Cartão de débito</option>
+                <option value="DINHEIRO">Dinheiro</option>
+            </select>
+            <button type="submit">Processar Pagamento</button>
+        </form>
+    </section>
+
+    <section class="card full">
+        <h2>Consultas e Relatórios</h2>
+        <div class="painel-buscas">
+            <div class="busca-item">
+                <button onclick="buscarDados('clientes')">Listar Clientes</button>
+            </div>
+            <div class="busca-item">
+                <button onclick="buscarDados('residencias')">Listar Residências</button>
+            </div>
+            <div class="busca-item">
+                <input type="number" id="filtroQuartoResidencia" placeholder="Filtrar por ID Residência">
+                <button onclick="buscarDados('quartos', document.getElementById('filtroQuartoResidencia').value)">Buscar Quartos</button>
+            </div>
+            <div class="busca-item">
+                <input type="number" id="filtroAluguelCliente" placeholder="Filtrar por ID Cliente">
+                <button onclick="buscarDados('alugueis', document.getElementById('filtroAluguelCliente').value)">Buscar Aluguéis</button>
+            </div>
+            <div class="busca-item">
+                <button onclick="buscarDados('pagamentos')">Listar Pagamentos</button>
+            </div>
+        </div>
+        
+        <div id="resultadoTabela" class="tabela-container">
+            <p class="placeholder-text">Os resultados estruturados aparecerão aqui...</p>
+        </div>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

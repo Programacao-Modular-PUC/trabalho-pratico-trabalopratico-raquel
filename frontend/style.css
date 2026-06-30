@@ -1,0 +1,120 @@
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+header {
+    background: #0f766e;
+    color: white;
+    padding: 28px;
+    text-align: center;
+}
+header h1 { margin: 0 0 8px; }
+.container {
+    width: min(1200px, 94%);
+    margin: 28px auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 20px;
+}
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.card h2 { margin-top: 0; color: #0f766e; }
+.destaque { border: 2px solid #0f766e; }
+.full { grid-column: 1 / -1; }
+form {
+    display: grid;
+    gap: 10px;
+}
+input, select, button {
+    width: 100%;
+    padding: 11px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    background-color: #fff;
+}
+label { font-size: 14px; }
+button {
+    background: #0f766e;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+button:hover { background: #115e59; }
+
+/* Utilitários Dinâmicos */
+.hidden { display: none !important; }
+.checkbox-group { display: flex; flex-wrap: wrap; gap: 15px; margin: 5px 0; }
+.checkbox-group label { display: flex; align-items: center; gap: 5px; }
+.checkbox-group input { width: auto; }
+.data-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.data-group label { font-size: 12px; color: #4b5563; }
+
+/* Painel de buscas e filtros */
+.painel-buscas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.busca-item {
+    display: flex;
+    gap: 6px;
+    flex: 1;
+    min-width: 200px;
+}
+.busca-item input {
+    padding: 8px;
+}
+.busca-item button {
+    padding: 8px 12px;
+    white-space: nowrap;
+}
+
+/* Tabelas Customizadas */
+.tabela-container {
+    overflow-x: auto;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-top: 10px;
+    max-height: 400px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+th, td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+th {
+    background-color: #f9fafb;
+    color: #4b5563;
+    font-weight: 700;
+}
+tr:hover { background-color: #f9fafb; }
+.placeholder-text {
+    padding: 30px;
+    text-align: center;
+    color: #9ca3af;
+    font-style: italic;
+    margin: 0;
+}
+
+@media (max-width: 800px) {
+    .container { grid-template-columns: 1fr; }
+    .data-group { grid-template-columns: 1fr; }
+}
