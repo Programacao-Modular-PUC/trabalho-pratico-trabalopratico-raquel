@@ -1,5 +1,6 @@
 # Sistema de Hospedagem
 
+Raquel Cristina Pereira dos Santos
 Projeto completo com frontend HTML/CSS/JS, backend Java Spring Boot e banco MySQL.
 
 ## Tecnologias
